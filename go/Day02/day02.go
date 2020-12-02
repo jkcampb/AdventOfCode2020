@@ -34,10 +34,12 @@ func parseLines(line string) (password string, character string, min int, max in
 	if found == nil {
 		fmt.Printf("no match found\n")
 	}
-
+	// found[0] is the whole string match, which we can ditch
 	password = found[4]
 	character = found[3]
 	max, err = strconv.Atoi(found[2])
+
+	// why does returning nil, nil, nil, nil, err no longer work??
 	if err != nil {
 		return "", "", 0, 0, err
 	}
@@ -70,9 +72,11 @@ func part1(arr []string) (countPassed int, err error) {
 }
 
 func checkPassword2(password string, character string, min int, max int) (result bool) {
+	// Check character at each position (index zero'd)
 	pos1 := (password[min-1] == []byte(character)[0])
 	pos2 := (password[max-1] == []byte(character)[0])
 
+	// Return the XOR (character has to be at 1 position, but not the other)
 	return pos1 != pos2
 }
 
@@ -101,13 +105,13 @@ func main() {
 
 	result1, err := part1(arr)
 	if err != nil {
-		log.Fatalf("readLines: %s", err)
+		log.Fatalf("Part1: %s", err)
 	}
 	fmt.Printf("Answer to part1: %v\n", result1)
 
 	result2, err := part2(arr)
 	if err != nil {
-		log.Fatalf("readLines: %s", err)
+		log.Fatalf("Part2: %s", err)
 	}
-	fmt.Printf("Answer to part1: %v\n", result2)
+	fmt.Printf("Answer to part2: %v\n", result2)
 }
