@@ -5,7 +5,7 @@ def main():
         
     for i, val1 in enumerate(report):
         for j, val2 in enumerate(report[i+1:]):
-            for k, val3 in enumerate(report[j+1:]):
+            for _, val3 in enumerate(report[j+1:]):
                 if val1+val2+val3 == 2020:
                     return val1*val2*val3
     
